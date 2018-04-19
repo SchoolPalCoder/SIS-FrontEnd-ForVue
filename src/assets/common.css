@@ -1,0 +1,32 @@
+.addressFixed {
+    position: fixed;
+    top: 40px;
+    left: 200px;
+    right: 0;
+    z-index: 10;
+    height: 46px;
+    padding-left: 20px;
+    border-bottom: 1px #e5e5e5 solid;
+    background-color: #fff;
+}
+.clearFix:before, .clearFix:after {
+    content: " ";
+    display: table;
+}
+.clearFix:after {
+    clear: both;
+}
+.fl {
+    float: left;
+}
+.fr {
+    float: right;
+}
+.main {
+    padding: 102px 0 0 220px;
+}
+/* 通用弹框样式（有头部--标题；有底部按钮） begin */
+.modal{ position: fixed;top:0;left:0;right:0;bottom:0; width:100%;height:100%; display: table; background-color: rgba(255,255,255,0.8);}
+.topmodel {z-index:30;}
+.modalInner{ display: table-cell;vertical-align: middle;}
+.modalContent{ min-height:60px; margin:0 auto; text-align: center; background-color: #fff; border-radius: 3px; box-shadow: 0 0 5px rgba(0,0,0,.2);}

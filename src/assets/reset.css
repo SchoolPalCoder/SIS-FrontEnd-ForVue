@@ -1,0 +1,11 @@
+/* reset.css */
+body, div, ul, ol, li, dl, dt, dd, input, button, a,p, img, h1, h2, h3, h4, h5, h6, form,pre{margin: 0;}
+ul, ol, li, dl, dt, dd, input, button{padding: 0;}
+html,body{height:100%;}
+*{-webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box;}
+body{ font-family: "Tahoma","Arial","Microsoft YaHei","\9ED1\4F53","\5B8B\4F53",sans-serif; font-size: 12px; color: #333; min-width:1200px; background-color:#ebebeb;}
+ul,li{list-style: none;}
+a{text-decoration: none;}
+img{border: 0;}
+button{background-color: transparent;cursor: pointer;}
+textarea{resize: none;}
