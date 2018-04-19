@@ -1,21 +1,19 @@
-# my_project
+# SIS-FE-VUE
 
-> A Vue.js project
+## 需求清单
 
-## Build Setup
-
-``` bash
-# install dependencies
-npm install
-
-# serve with hot reload at localhost:8080
-npm run dev
-
-# build for production with minification
-npm run build
-
-# build for production and view the bundle analyzer report
-npm run build --report
-```
-
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+-  实现nav
+-  二级菜单
+-  面包屑
+-  路由任意节点跳转
+-  要有路由钩子处理事件 处理路由切换时的拦截或重定向
+-  全局loading样式（网络请求时、前端渲染时）
+-  要有网络层，即有前后端通信,统一拦截并处理请求
+-  特殊场景下,需要路由跳转时保存列表状态数据
+-  深度结合状态管理
+-  实现xb-title 即:鼠标悬浮显示Tip浮层,并且能根据显示区域的边缘情况自动显示到没被遮住的一边
+-  滚动加载
+-  结合filter 类似于直接在View层可以方便的执行处理函数
+-  类似xb-window的穿透,插槽
+-  根据路由设置网页的title
+-  项目国际化语言支持
