@@ -17,3 +17,31 @@
 -  类似xb-window的穿透,插槽
 -  根据路由设置网页的title
 -  项目国际化语言支持
+
+## 提交流程
+
+1. 克隆代码到本地
+
+```shell
+git clone https://github.com/SchoolPalCoder/SIS-FrontEnd-ForVue.git
+```
+
+2. 创建个本地分支
+
+```shell
+git branch my_remote_branch_name
+```
+
+其中`my_remote_branch_name`为你的分支名称
+
+3. 切换到对应分支进行开发
+
+```shell
+git checkout my_remote_branch_name
+```
+
+4. 提交本地分支至远程仓库
+
+```shell
+  git push -u origin my_remote_branch_name
+```
