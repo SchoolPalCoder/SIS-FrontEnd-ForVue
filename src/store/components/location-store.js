@@ -1,10 +1,11 @@
+import { types } from "../mutation-types";
 export default {
-    state: {
-        list: []
-    },
-    mutations: {
-        locationInit(state, list) {
-            state.list = list;
-        }
+  state: {
+    list: []
+  },
+  mutations: {
+    [types.LOCATION_INIT](state, list) {
+      state.list = list;
     }
+  }
 }
