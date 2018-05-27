@@ -70,6 +70,7 @@ import advancedSearch from "../../components/common/advancedSearch";
 import popLayout from "../../components/common/pop-layout";
 import Net from "../../services/net/student-net";
 import throttle from "lodash/throttle";
+import { types } from "../../store/mutation-types";
 export default {
   name: "StudentList",
   components: { advancedSearch, popLayout },
@@ -90,7 +91,7 @@ export default {
     };
   },
   created: function() {
-    this.$store.commit("locationInit", [{ name: "我的学生" }]);
+    this.$store.commit(types.LOCATION_INIT, [{ name: "我的学生" }]);
     this.$store.commit("secondMenuInit", []);
     console.log("1");
     // if (this.$store.state.advaned.searchData == "") {
@@ -104,10 +105,6 @@ export default {
   },
   mounted: function() {
     this.getData();
-    this.getData();
-    this.getData();
-    this.getData();
-    console.log(this);
   },
   computed: {},
   methods: {
@@ -171,5 +168,4 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
 </style>
