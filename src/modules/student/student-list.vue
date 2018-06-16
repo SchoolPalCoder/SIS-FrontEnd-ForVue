@@ -31,10 +31,39 @@
               prop="create_at"
               label="时间"
               >
+              <template slot-scope="scope">
+                <span >{{ scope.row.date | date }}</span>
+              </template>
             </el-table-column>
           </el-table>
+
       </el-tab-pane>
-      <el-tab-pane label="全部学生">全部学生</el-tab-pane>
+      <el-tab-pane label="全部学生">
+        <el-table
+            :data="allStudentList"
+            border
+            style="width: 100%">
+            <el-table-column
+              prop="title"
+              label="标题"
+              >
+            </el-table-column>
+            <el-table-column
+              prop="create_at"
+              label="时间"
+              >
+            </el-table-column>
+          </el-table>
+       <el-pagination
+      @size-change="changePage(1,arguments[0])"
+      @current-change="changePage(arguments[0],_data.page.pageSize)"
+      :current-page="page.pageIndex"
+      :page-sizes="[10, 20,50]"
+      :page-size="10"
+      layout="total, sizes, prev, pager, next, jumper"
+      :total="studentList.length+10">
+    </el-pagination>
+        </el-tab-pane>
     </el-tabs>
   </div>
 </template>
@@ -43,6 +72,8 @@
 import advancedSearch from "../../components/common/advancedSearch";
 import popLayout from "../../components/common/pop-layout";
 import Net from "../../services/net/student-net";
+import throttle from "lodash/throttle";
+import { types } from "../../store/mutation-types";
 export default {
   name: "StudentList",
   components: { advancedSearch, popLayout },
@@ -54,11 +85,16 @@ export default {
         time: ""
       },
       studentList: [],
-      isShowPop: false
+      allStudentList: [],
+      isShowPop: false,
+      page: {
+        pageIndex: 1,
+        pageSize: 10
+      }
     };
   },
   created: function() {
-    this.$store.commit("locationInit", [{ name: "我的学生" }]);
+    this.$store.commit(types.LOCATION_INIT, [{ name: "我的学生" }]);
     this.$store.commit("secondMenuInit", []);
     console.log("1");
     // if (this.$store.state.advaned.searchData == "") {
@@ -73,6 +109,7 @@ export default {
   mounted: function() {
     this.getData();
   },
+  computed: {},
   methods: {
     cancel() {
       this.isShowPop = false;
@@ -84,40 +121,34 @@ export default {
       console.log(this.$store.state.advaned.searchData);
     },
     getData() {
-      Net.getList()
-        .then(data => {
-          this.studentList = data;
-          console.log(this.studentList.length);
-        })
-        .catch(err => {
-          console.log(err);
+      throttle(() => {
+        Net.getList(this.page.pageIndex, this.page.pageSize).then(data => {
+          if (this.page.pageIndex === 1) {
+            this.studentList = data;
+          } else {
+            this.studentList = this.studentList.concat(data);
+          }
+          this.allStudentList = data;
+          console.log(
+            this.page.pageIndex,
+            this.page.pageSize,
+            this.studentList.length
+          );
         });
+      }, 2000)();
     },
     loadMore() {
       console.log("滚动到底了");
-      Net.getList()
-        .then(data => {
-          this.studentList = this.studentList.concat(data);
-          console.log(this.studentList.length);
-        })
-        .catch(err => {
-          console.log(err);
-        });
+      this.page.pageIndex++;
+      this.getData();
     },
     chooseTab(tab, event) {
       if (tab.index === "0") {
-        this.$store.commit("locationInit", [{ name: "我的学生" }]);
+        this.$store.commit(types.LOCATION_INIT, [{ name: "我的学生" }]);
         this.getData();
       } else {
-        this.$store.commit("locationInit", [{ name: "全部学生" }]);
-        Net.getErrorList()
-          .then(data => {
-            this.studentList = data;
-            console.log(data);
-          })
-          .catch(err => {
-            console.log(err);
-          });
+        this.$store.commit(types.LOCATION_INIT, [{ name: "全部学生" }]);
+        this.getData();
       }
     },
     goToEdit() {
@@ -128,6 +159,11 @@ export default {
     },
     goToHome() {
       this.$router.push({ path: "/home" });
+    },
+    changePage(pageIndex = 1, pageSize = 10) {
+      console.log(pageIndex, pageSize);
+      Object.assign(this.page, { pageIndex, pageSize });
+      this.getData();
     }
   }
 };
@@ -135,5 +171,4 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
 </style>

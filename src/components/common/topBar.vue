@@ -20,6 +20,7 @@ export default {
     height: 40px;
     padding-left: 20px;
     background-color: #2d2d2d;
+    z-index: 3;
 }
 .logoText {
   display: inline-block;

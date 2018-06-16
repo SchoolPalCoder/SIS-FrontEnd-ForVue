@@ -3,7 +3,7 @@
         <span class="route">当前位置：</span>
         <el-breadcrumb class="route" separator-class="el-icon-arrow-right">
         <el-breadcrumb-item  v-for="(item) in $router.currentRoute.matched" :key="item.index" :to="{ path: item.path }">{{item.name}}</el-breadcrumb-item>
-        <el-breadcrumb-item  v-for="(item) in $store.state.location.list" :key="item.index" :to="{ path: '/' }">{{item.name}}</el-breadcrumb-item>
+        <el-breadcrumb-item  v-for="(item) in $store.state.location.list" :key="item.index" >{{item.name}}</el-breadcrumb-item>
         </el-breadcrumb>
     </div>
 </template>
