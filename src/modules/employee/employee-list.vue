@@ -5,6 +5,7 @@
 </template>
 
 <script>
+import { types } from "../../store/mutation-types";
 export default {
   name: "EmployeeList",
   data() {
@@ -13,12 +14,11 @@ export default {
     };
   },
   created: function() {
-    this.$store.commit("locationInit", []);
+    this.$store.commit(types.LOCATION_INIT, []);
   }
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
 </style>

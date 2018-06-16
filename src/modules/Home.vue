@@ -6,6 +6,7 @@
 </template>
 
 <script>
+import { types } from "../store/mutation-types";
 export default {
   name: "Home",
   data() {
@@ -14,7 +15,7 @@ export default {
     };
   },
   created: function() {
-    this.$store.commit("locationInit", []);
+    this.$store.commit(types.LOCATION_INIT, []);
     this.$store.commit("secondMenuInit", []);
   },
   methods: {
