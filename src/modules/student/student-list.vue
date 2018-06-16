@@ -123,7 +123,7 @@ export default {
       console.log(this.searchData);
       console.log(this.$store.state.advaned.searchData);
     },
-    getData() {
+    getData(hideFullLoading) {
       this.loading = true;
       // Loading.service().close();
       throttle(() => {
@@ -132,7 +132,7 @@ export default {
             pageIndex: this.page.pageIndex,
             pageSize: this.page.pageSize
           },
-          true
+          !hideFullLoading
         ).then(data => {
           if (this.page.pageIndex === 1) {
             this.studentList = data;
@@ -175,7 +175,7 @@ export default {
     changePage(pageIndex = 1, pageSize = 10) {
       console.log(pageIndex, pageSize);
       Object.assign(this.page, { pageIndex, pageSize });
-      this.getData();
+      this.getData(true);
     }
   }
 };
