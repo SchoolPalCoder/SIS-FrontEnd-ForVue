@@ -18,6 +18,7 @@
       <el-tab-pane label="我的学生">
           <el-table
             v-loadmore="loadMore"
+            v-loading="loading"
             :data="studentList"
             border
             height="500"
@@ -32,7 +33,7 @@
               label="时间"
               >
               <template slot-scope="scope">
-                <span >{{ scope.row.date | date }}</span>
+                <span >{{ scope.row.create_at | date }}</span>
               </template>
             </el-table-column>
           </el-table>
@@ -74,6 +75,7 @@ import popLayout from "../../components/common/pop-layout";
 import Net from "../../services/net/student-net";
 import throttle from "lodash/throttle";
 import { types } from "../../store/mutation-types";
+import { Loading } from "element-ui";
 export default {
   name: "StudentList",
   components: { advancedSearch, popLayout },
@@ -90,7 +92,8 @@ export default {
       page: {
         pageIndex: 1,
         pageSize: 10
-      }
+      },
+      loading: false
     };
   },
   created: function() {
@@ -121,14 +124,23 @@ export default {
       console.log(this.$store.state.advaned.searchData);
     },
     getData() {
+      this.loading = true;
+      // Loading.service().close();
       throttle(() => {
-        Net.getList(this.page.pageIndex, this.page.pageSize).then(data => {
+        Net.getList(
+          {
+            pageIndex: this.page.pageIndex,
+            pageSize: this.page.pageSize
+          },
+          true
+        ).then(data => {
           if (this.page.pageIndex === 1) {
             this.studentList = data;
           } else {
             this.studentList = this.studentList.concat(data);
           }
           this.allStudentList = data;
+          this.loading = false;
           console.log(
             this.page.pageIndex,
             this.page.pageSize,
