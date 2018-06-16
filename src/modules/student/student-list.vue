@@ -31,6 +31,9 @@
               prop="create_at"
               label="时间"
               >
+              <template slot-scope="scope">
+                <span >{{ scope.row.date | date }}</span>
+              </template>
             </el-table-column>
           </el-table>
 
@@ -141,10 +144,10 @@ export default {
     },
     chooseTab(tab, event) {
       if (tab.index === "0") {
-        this.$store.commit("locationInit", [{ name: "我的学生" }]);
+        this.$store.commit(types.LOCATION_INIT, [{ name: "我的学生" }]);
         this.getData();
       } else {
-        this.$store.commit("locationInit", [{ name: "全部学生" }]);
+        this.$store.commit(types.LOCATION_INIT, [{ name: "全部学生" }]);
         this.getData();
       }
     },
