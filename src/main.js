@@ -9,6 +9,8 @@ import '../src/assets/reset.css'
 Vue.config.productionTip = false
 import ElementUI from 'element-ui'//这里我们仅引用了Button, Select这两个组件
 import 'element-ui/lib/theme-chalk/index.css'
+import i18n from 'vue-i18n';
+import './filters';
 /* eslint-disable no-new */
 import '../src/components/directives'
 Vue.use(ElementUI);
@@ -24,6 +26,7 @@ let a = new Vue({
   el: '#app',
   router,
   store,
+  i18n,
   components: { App },
   template: '<App/>'
 })
