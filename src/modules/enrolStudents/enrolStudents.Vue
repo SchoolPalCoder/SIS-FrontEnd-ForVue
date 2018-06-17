@@ -6,6 +6,7 @@
 </template>
 
 <script>
+import { types } from "../../store/mutation-types";
 export default {
   name: "EnrolStudents",
   data() {
@@ -14,7 +15,7 @@ export default {
     };
   },
   created: function() {
-    this.$store.commit("locationInit", []);
+    this.$store.commit(types.LOCATION_INIT, []);
     this.$store.commit("secondMenuInit", [
       { name: "线索", path: "/clue" },
       { name: "表单", path: "/from" }
@@ -25,5 +26,4 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
 </style>
