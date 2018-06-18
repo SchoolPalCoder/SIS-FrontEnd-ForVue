@@ -7,15 +7,14 @@ import router from './router'
 import store from './store'
 import '../src/assets/reset.css'
 Vue.config.productionTip = false
-import { Button, Select } from 'element-ui'//这里我们仅引用了Button, Select这两个组件
+import ElementUi from 'element-ui'//这里我们仅引用了Button, Select这两个组件
 import 'element-ui/lib/theme-chalk/index.css'
 import i18n from 'vue-i18n';
 import './filters';
 /* eslint-disable no-new */
 import '../src/components/directives'
+Vue.use(ElementUi);
 Vue.prototype.$ELEMENT = { size: 'small', zIndex: 1 };
-Vue.use(Button);
-Vue.use(Select);
 
 router.afterEach((to, from) => {
   if (to.matched[0].meta.title) {
