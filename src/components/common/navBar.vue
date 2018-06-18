@@ -3,7 +3,7 @@
         <div class="logo"></div>
         <el-menu
             :router=true
-            :default-active="$route.matched[0].path"
+            :default-active="$route.matched[0] && $route.matched[0].path"
             class="el-menu-vertical-demo"
             @select="selectNav"
             background-color="#505bbe"
