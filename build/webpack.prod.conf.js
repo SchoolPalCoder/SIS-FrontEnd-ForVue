@@ -27,7 +27,7 @@ const webpackConfig = merge(baseWebpackConfig, {
   output: {
     path: config.build.assetsRoot,
     filename: utils.assetsPath('js/[name].[chunkhash].js'),
-    chunkFilename: utils.assetsPath('js/[id].[chunkhash].js')
+    chunkFilename: utils.assetsPath('js/[name].[chunkhash].js')
   },
   optimization: {
     runtimeChunk: {
@@ -51,27 +51,21 @@ const webpackConfig = merge(baseWebpackConfig, {
       }),
     ],
     splitChunks: {
-      chunks: 'async',
-      minSize: 30000,
+      chunks: 'all',
+      minSize: 20000,
       minChunks: 1,
       maxAsyncRequests: 5,
       maxInitialRequests: 3,
-      name: false,
       cacheGroups: {
-        vendor: {
-          name: 'vendor',
-          chunks: 'initial',
-          priority: -10,
-          reuseExistingChunk: false,
-          test: /node_modules\/(.*)\.js/
-        },
-        styles: {
-          name: 'styles',
-          test: /\.(scss|css)$/,
-          chunks: 'all',
-          minChunks: 1,
+        default: {
+          minChunks: 2,
+          priority: -20,
           reuseExistingChunk: true,
-          enforce: true
+        },
+        vendors: {
+          test: /[\\/]node_modules[\\/]/,
+          priority: -10,
+          minChunks: 1
         }
       }
     }
